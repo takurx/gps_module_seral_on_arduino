@@ -77,6 +77,7 @@ String Data[16];
 
 float deg;
 long int ido,keido;
+float lat, lon, alt;
 
 char moji;
 
@@ -115,7 +116,8 @@ void loop() { // run over and over
             ido = Data[3].substring(5, 9).toInt() + Data[3].substring(0, 4).toInt()*10000;
             keido = Data[5].substring(6, 10).toInt() + Data[5].substring(0, 5).toInt()*10000;
             deg = Data[8].toFloat();
-  
+
+            
             Serial.print(Data[0]);  Serial.print("\t"); //GNRMC
             Serial.print(Data[1]);  Serial.print("\t"); //Unix time
             Serial.print(Data[2]);  Serial.print("\t"); //Status
@@ -127,9 +129,16 @@ void loop() { // run over and over
             Serial.print(deg);      Serial.print("\t"); //degree
             Serial.print(Data[9]);  Serial.print("\t"); //UTC date
             Serial.println(Data[10]); //Serial.print("\t"); //Mode indicator
+            
+            Serial.println(deg);      //Serial.print("\t"); //degree
           }
           else if(Data[0] == "GNGGA")
           {
+            lat = Data[2].toFloat();
+            lon = Data[4].toFloat();
+            alt = Data[9].toFloat();
+
+            /*
             Serial.print(Data[0]);  Serial.print("\t"); //GNGGA
             Serial.print(Data[1]);  Serial.print("\t"); //Unix time
             Serial.print(Data[2]);  Serial.print("\t"); //Latitude
@@ -142,6 +151,10 @@ void loop() { // run over and over
             Serial.print(Data[9]);  Serial.print("\t"); //Altitude
             Serial.print(Data[10]);  Serial.print("\t"); //Geoidal Separation
             Serial.println(Data[11]);  //Serial.print("\t"); //DGPS Station ID
+            */
+            Serial.print(lat);      Serial.print("\t"); //Latitude
+            Serial.print(lon);      Serial.print("\t"); //Longitude
+            Serial.print(alt);      Serial.print("\t"); //degree
           }
           
           break;
